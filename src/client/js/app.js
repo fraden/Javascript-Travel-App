@@ -66,3 +66,8 @@ const postData = async(url = '', data = {}) => { // source: lesson 4: asynchrono
         console.log("error", error);
     }
 }
+
+export {
+    getWeatherData,
+    refreshUI
+}

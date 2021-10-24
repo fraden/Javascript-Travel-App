@@ -1,6 +1,5 @@
 // define variables
 const port = 7272;
-const project_folder = 'website';
 var projectData = {};
 
 // Setup empty JS object to act as endpoint for all routes
@@ -24,7 +23,7 @@ app.use(cors());
 
 // Initialize the main project folder
 // source: https://expressjs.com/de/starter/static-files.html
-app.use(express.static(project_folder));
+app.use(express.static('dist'));
 
 // Spin up the server
 const server = app.listen(port, () => { console.log(`running on localhost: ${port}`) }) // source: Lesson 2.6 in course
