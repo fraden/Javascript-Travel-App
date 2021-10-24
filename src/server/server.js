@@ -40,6 +40,6 @@ app.get("/all", (req, res) => {
 
 app.post('/data', function(req, res) {
     projectData['lat'] = req.body.lat;
-    projectData['lon'] = req.body.lon;
+    projectData['lng'] = req.body.lng;
     projectData['country'] = req.body.country;
 });

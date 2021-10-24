@@ -7,7 +7,7 @@ const baseURL = "http://api.geonames.org/postalCodeLookupJSON?country=DE&postalc
 let d = new Date();
 let newDate = d.getMonth() + 1 + '.' + d.getDate() + '.' + d.getFullYear();
 
-const getWeatherData = async(baseUrl, zip, username) => {
+const getWeatherData = async(baseUrl, zip) => {
     const res = await fetch(baseURL + zip + "&username=fraden");
     const data = await res.json();
     return data;
@@ -21,9 +21,9 @@ const cbFunction = (event) => {
         const zip = document.getElementById("zip").value;
         const userResponse = document.getElementById('feelings').value;
 
-        getWeatherData(baseURL, zip, USERNAME).then(
+        getWeatherData(baseURL, zip).then(
             (data) => {
-                postData("http://localhost:8081/data", { lat: data.postalcodes[0].lat, lon: data.postalcodes[0].lat, country: data.postalcodes[0].country }); // structure can be seen on https://openweathermap.org/current#zip
+                postData("http://localhost:8081/data", { lat: data.postalcodes[0].lat, lng: data.postalcodes[0].lng, country: data.postalcodes[0].countryCode }); // structure can be seen on https://openweathermap.org/current#zip
             }).then(() => {
             refreshUI();
         });
@@ -40,7 +40,7 @@ const refreshUI = async() => { // source: lesson 4: asynchronous javascript -  1
     try {
         const projectData = await request.json();
         document.getElementById('lat').innerHTML = projectData.lat;
-        document.getElementById('lon').innerHTML = projectData.lon;
+        document.getElementById('lng').innerHTML = projectData.lng;
         document.getElementById('country').innerHTML = projectData.country;
     } catch (error) {
         console.log("error", error);
