@@ -1,15 +1,14 @@
 /* Global Variables */
-const API_KEY = "273148ea085a8ad64dcf816c98d1bfa1";
 
-const baseURL = "http://api.openweathermap.org/data/2.5/weather?zip=";
+const baseURL = "http://api.geonames.org/postalCodeLookupJSON?country=DE&postalcode=";
+
 
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = d.getMonth() + 1 + '.' + d.getDate() + '.' + d.getFullYear();
 
-const getWeatherData = async(baseUrl, zip, apiKey) => {
-    // api doc see here: https://openweathermap.org/current#zip
-    const res = await fetch(baseURL + zip + "&units=metric" + "&appid=" + apiKey);
+const getWeatherData = async(baseUrl, zip, username) => {
+    const res = await fetch(baseURL + zip + "&username=fraden");
     const data = await res.json();
     return data;
 }
@@ -22,9 +21,9 @@ const cbFunction = (event) => {
         const zip = document.getElementById("zip").value;
         const userResponse = document.getElementById('feelings').value;
 
-        getWeatherData(baseURL, zip, API_KEY).then(
+        getWeatherData(baseURL, zip, USERNAME).then(
             (data) => {
-                postData("http://localhost:8081/data", { temperature: data.main.temp, date: newDate, userResponse: userResponse }); // structure can be seen on https://openweathermap.org/current#zip
+                postData("http://localhost:8081/data", { lat: data.postalcodes[0].lat, lon: data.postalcodes[0].lat, country: data.postalcodes[0].country }); // structure can be seen on https://openweathermap.org/current#zip
             }).then(() => {
             refreshUI();
         });
@@ -40,9 +39,9 @@ const refreshUI = async() => { // source: lesson 4: asynchronous javascript -  1
     const request = await fetch('http://localhost:8081/all');
     try {
         const projectData = await request.json();
-        document.getElementById('temp').innerHTML = projectData.temperature;
-        document.getElementById('date').innerHTML = projectData.date;
-        document.getElementById('content').innerHTML = projectData.userResponse;
+        document.getElementById('lat').innerHTML = projectData.lat;
+        document.getElementById('lon').innerHTML = projectData.lon;
+        document.getElementById('country').innerHTML = projectData.country;
     } catch (error) {
         console.log("error", error);
     }

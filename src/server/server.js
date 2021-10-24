@@ -39,7 +39,7 @@ app.get("/all", (req, res) => {
 // Post Route
 
 app.post('/data', function(req, res) {
-    projectData['temperature'] = req.body.temperature;
-    projectData['date'] = req.body.date;
-    projectData['userResponse'] = req.body.userResponse;
+    projectData['lat'] = req.body.lat;
+    projectData['lon'] = req.body.lon;
+    projectData['country'] = req.body.country;
 });
