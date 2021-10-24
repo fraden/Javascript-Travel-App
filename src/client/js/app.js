@@ -24,7 +24,7 @@ const cbFunction = (event) => {
 
         getWeatherData(baseURL, zip, API_KEY).then(
             (data) => {
-                postData("/data", { temperature: data.main.temp, date: newDate, userResponse: userResponse }); // structure can be seen on https://openweathermap.org/current#zip
+                postData("http://localhost:8081/data", { temperature: data.main.temp, date: newDate, userResponse: userResponse }); // structure can be seen on https://openweathermap.org/current#zip
             }).then(() => {
             refreshUI();
         });
@@ -37,7 +37,7 @@ const cbFunction = (event) => {
 document.getElementById("generate").addEventListener("click", cbFunction)
 
 const refreshUI = async() => { // source: lesson 4: asynchronous javascript -  10. Updating UI Elements
-    const request = await fetch('/all');
+    const request = await fetch('http://localhost:8081/all');
     try {
         const projectData = await request.json();
         document.getElementById('temp').innerHTML = projectData.temperature;

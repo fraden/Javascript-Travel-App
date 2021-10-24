@@ -1,5 +1,5 @@
 // define variables
-const port = 7272;
+const port = 8081;
 var projectData = {};
 
 // Setup empty JS object to act as endpoint for all routes
