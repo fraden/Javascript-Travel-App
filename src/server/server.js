@@ -13,7 +13,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 /* Middleware*/
-// source: https://www.npmjs.com/package/body-parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -22,7 +21,6 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Initialize the main project folder
-// source: https://expressjs.com/de/starter/static-files.html
 app.use(express.static('dist'));
 
 // Spin up the server
