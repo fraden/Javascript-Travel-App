@@ -1,16 +1,16 @@
 // define variables
 const port = 8081;
-var projectData = {};
+let projectData = {};
 
 // Setup empty JS object to act as endpoint for all routes
 // Express to run server and routes
 const express = require('express');
 // Start up an instance of app
-var app = express();
+const app = express();
 
 /* Dependencies */
-var bodyParser = require('body-parser');
-var cors = require('cors');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 /* Middleware*/
 // source: https://www.npmjs.com/package/body-parser

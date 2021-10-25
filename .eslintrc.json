@@ -29,6 +29,7 @@
         ],
         "no-unused-vars": [
             "error", { "vars": "all", "args": "none", "ignoreRestSiblings": false }
-        ]
+        ],
+        "no-var": 1
     }
 }
