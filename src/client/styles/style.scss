@@ -5,15 +5,15 @@ body {
 
 #app {
     display: grid;
-    grid-auto-rows: minmax(150px, auto);
+    //grid-auto-rows: minmax(150px, auto);
     /* grid-template-columns:  */
-    height: 140vh;
     background: #f23557;
     color: #f0d43a;
     justify-content: center;
     grid-gap: 1em;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
+    border: medium dashed red;
 }
 
 .holder {}
@@ -30,7 +30,9 @@ body {
 
 #content {}
 
-.headline {}
+.headline {
+    font-size: xx-large;
+}
 
 .title {}
 
@@ -45,12 +47,12 @@ label {
 input {
     display: block;
     height: 60px;
-    width: 320px;
+    width: 300px;
     background: #22b2da;
     color: #f0d43a;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
-    border: none;
+    border: medium dashed green;
 }
 
 button {
@@ -60,7 +62,7 @@ button {
     color: #f0d43a;
     font-size: 26px;
     font-family: 'Oswald', sans-serif;
-    border: none;
+    border: medium dashed blue;
     box-shadow: 2px 4px 5px #444;
 }
 
@@ -73,6 +75,7 @@ textarea {
     color: #f0d43a;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
+    border: medium dashed purple;
 }
 
 

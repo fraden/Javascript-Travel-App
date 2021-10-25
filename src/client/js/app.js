@@ -24,7 +24,7 @@ const getGeoInfo = async(url, zip) => {
     return data;
 };
 
-const getWeatherForeCast = async(url, zip, api_key) => {
+const getWeatherForecast = async(url, zip, api_key) => {
     const res = await fetch(url + zip + '&key=' + api_key);
     const data = await res.json();
     return data;
@@ -56,7 +56,7 @@ const cbFunction = (event) => {
                     postData('http://localhost:8081/data', { lat: data.postalcodes[0].lat, lng: data.postalcodes[0].lng, country: data.postalcodes[0].countryCode, city: data.postalcodes[0].placeName }); // structure can be seen on https://openweathermap.org/current#zip
                 });
 
-            getWeatherForeCast(weatherbitBaseUrl, zip, weatherbit_apiKey).then(
+            getWeatherForecast(weatherbitBaseUrl, zip, weatherbit_apiKey).then(
                 (data) => {
                     countdown();
                     postData('http://localhost:8081/forecast', { low: data.data[days_till_trip].low_temp, high: data.data[days_till_trip].high_temp, description: data.data[days_till_trip].weather.description });
@@ -94,8 +94,8 @@ const refreshUI = async() => { // source: lesson 4: asynchronous javascript -  1
         document.getElementById('country').innerHTML = projectData.country;
         document.getElementById('city').innerHTML = projectData.city;
 
-        document.getElementById('high').innerHTML = projectData.high;
-        document.getElementById('low').innerHTML = projectData.low;
+        document.getElementById('high').innerHTML = 'Max temperature: ' + projectData.high;
+        document.getElementById('low').innerHTML = 'Min temperature: ' + projectData.low;
         document.getElementById('description').innerHTML = projectData.description;
 
         document.getElementById('city-image').src = projectData.imageUrl;
