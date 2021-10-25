@@ -5,6 +5,12 @@ const baseURL = "http://api.geonames.org/postalCodeLookupJSON?country=DE&postalc
 
 const weatherbitBaseUrl = "https://api.weatherbit.io/v2.0/forecast/daily?country=DE&postal_code="
 
+const pixabayBaseUrl = "https://pixabay.com/api/?image_type=photo&pretty=true&q=";
+
+const weatherbit_apiKey = "3c7928d0043e4e98a2429187b5fa5cce"; //todo: roll the api-keys and load them from .env-file
+const pixabay_apiKey = "24029659-1e8be7f9b0a8b31c54fe84556";
+
+let globals = {}; // Globally scoped object
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -12,8 +18,8 @@ let newDate = d.getMonth() + 1 + '.' + d.getDate() + '.' + d.getFullYear();
 
 let days_till_trip;
 
-const getWeatherData = async(baseUrl, zip) => {
-    const res = await fetch(baseURL + zip + "&username=fraden");
+const getGeoInfo = async(url, zip) => {
+    const res = await fetch(url + zip + "&username=fraden");
     const data = await res.json();
     return data;
 }
@@ -21,7 +27,12 @@ const getWeatherData = async(baseUrl, zip) => {
 const getWeatherForeCast = async(url, zip, api_key) => {
     const res = await fetch(url + zip + "&key=" + api_key);
     const data = await res.json();
-    console.log(data);
+    return data;
+}
+
+const getImage = async(url, searchString, api_key) => {
+    const res = await fetch(url + searchString + "&key=" + api_key);
+    const data = await res.json();
     return data;
 }
 
@@ -31,6 +42,8 @@ const getWeatherForeCast = async(url, zip, api_key) => {
 
 
 const cbFunction = (event) => {
+
+
     event.preventDefault();
     if (document.getElementById("trip-date").value == '') {
         alert("Please enter a trip date!");
@@ -38,22 +51,33 @@ const cbFunction = (event) => {
         try {
             const zip = document.getElementById("zip").value;
             const userResponse = document.getElementById('feelings').value;
-
-            getWeatherData(baseURL, zip).then(
+            getGeoInfo(baseURL, zip).then(
                 (data) => {
-                    postData("http://localhost:8081/data", { lat: data.postalcodes[0].lat, lng: data.postalcodes[0].lng, country: data.postalcodes[0].countryCode }); // structure can be seen on https://openweathermap.org/current#zip
+                    globals.city = data.postalcodes[0].placeName;
+                    postData("http://localhost:8081/data", { lat: data.postalcodes[0].lat, lng: data.postalcodes[0].lng, country: data.postalcodes[0].countryCode, city: data.postalcodes[0].placeName }); // structure can be seen on https://openweathermap.org/current#zip
                 });
 
-            getWeatherForeCast(weatherbitBaseUrl, zip, "6942762c11ac41c2876a88f981363642").then(
+            getWeatherForeCast(weatherbitBaseUrl, zip, weatherbit_apiKey).then(
                 (data) => {
                     countdown();
-                    console.log(days_till_trip);
-                    console.log(typeof(days_till_trip));
-                    console.log(data.data[days_till_trip]);
-                    postData("http://localhost:8081/forecast", { low: data.data[days_till_trip].low_temp, high: data.data[days_till_trip].high_temp, description: data.data[days_till_trip].weather.description }); // structure can be seen on https://openweathermap.org/current#zip
-                });
+                    postData("http://localhost:8081/forecast", { low: data.data[days_till_trip].low_temp, high: data.data[days_till_trip].high_temp, description: data.data[days_till_trip].weather.description });
+                }).then(() => {
+                refreshUI();
+            });
+
+            getImage(pixabayBaseUrl, globals.city + "+stadt", pixabay_apiKey).then(
+                (data) => {
+                    console.log("---");
+                    console.log(city);
+                    console.log(data.hits[0].webformatURL);
+                    postData("http://localhost:8081/image", { imageUrl: data.hits[0].webformatURL });
+                }).then(() => {
+                refreshUI();
+            });
 
             refreshUI();
+
+
             // todo: why doesn't the values change after some clicks?
         } catch (error) {
             console.log("error", error);
@@ -72,10 +96,13 @@ const refreshUI = async() => { // source: lesson 4: asynchronous javascript -  1
         document.getElementById('lat').innerHTML = projectData.lat;
         document.getElementById('lng').innerHTML = projectData.lng;
         document.getElementById('country').innerHTML = projectData.country;
+        document.getElementById('city').innerHTML = projectData.city;
 
         document.getElementById('high').innerHTML = projectData.high;
         document.getElementById('low').innerHTML = projectData.low;
         document.getElementById('description').innerHTML = projectData.description;
+
+        document.getElementById("city-image").src = projectData.imageUrl;
     } catch (error) {
         console.log("error", error);
     }
@@ -111,6 +138,6 @@ const countdown = () => {
 document.getElementById("time-submit").addEventListener("click", countdown)
 
 export {
-    getWeatherData,
+    getGeoInfo,
     refreshUI
 }

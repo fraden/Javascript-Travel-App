@@ -1,9 +1,9 @@
-import { getWeatherData } from './js/app'
+import { getGeoInfo } from './js/app'
 import { refreshUI } from './js/app'
 
 import './styles/style.scss'
 
 export {
-    getWeatherData,
+    getGeoInfo,
     refreshUI
 }
