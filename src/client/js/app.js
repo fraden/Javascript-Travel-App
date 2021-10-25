@@ -125,16 +125,24 @@ const postData = async(url = '', data = {}) => { // source: lesson 4: asynchrono
 
 const countdown = () => {
 
-    let tripDate = document.getElementById('trip-date').value;
-    if (tripDate == '') {
+    let tripDateText = document.getElementById('trip-date').value;
+    if (tripDateText == '') {
         alert('Please enter the start-date of the trip.');
     } else {
-        let current_date = new Date(new Date().toISOString().split('T')[0]);
-        let date_of_trip = new Date(tripDate);
-        let delta = deltaBetweenDates(date_of_trip, current_date);
+        let currentDate = new Date(new Date().toISOString().split('T')[0]);
+        let tripDate = new Date(tripDateText);
+        let delta = deltaBetweenDates(tripDate, currentDate);
         document.getElementById('days-till-trip').innerHTML = 'There are ' + delta + ' days till your trip.';
         days_till_trip = delta;
+
+        let tripEnd = document.getElementById('trip-end').value;
+        if (tripEnd != '') {
+            let tripEndDate = new Date(tripEnd);
+            let lengthOfTrip = deltaBetweenDates(tripEndDate, tripDate);
+            document.getElementById('trip-length').innerHTML = 'Your trip length is ' + (lengthOfTrip + 1) + ' days.';
+        }
     }
+
 
 };
 
