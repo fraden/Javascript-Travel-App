@@ -14,8 +14,8 @@ var cors = require('cors');
 
 /* Middleware*/
 // source: https://www.npmjs.com/package/body-parser
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //Here we are configuring express to use body-parser as middle-ware.
 // Cors for cross origin allowance
@@ -26,15 +26,18 @@ app.use(cors());
 app.use(express.static('dist'));
 
 // Spin up the server
-const server = app.listen(port, () => { console.log(`running on localhost: ${port}`) }) // source: Lesson 2.6 in course
-    // Callback to debug
+// eslint-disable-next-line no-unused-vars
+const server = app.listen(port, () => {
+    console.log(`running on localhost: ${port}`);
+}); // source: Lesson 2.6 in course
+// Callback to debug
 
 // Initialize all route with a callback function
 
 // Callback function to complete GET '/all'
-app.get("/all", (req, res) => {
+app.get('/all', (req, res) => {
     res.send(projectData);
-})
+});
 
 // Post Route
 
