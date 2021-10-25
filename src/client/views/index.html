@@ -17,14 +17,16 @@
             <input type="text" id="zip" placeholder="enter zip code here">
         </div>
         <div id="time">
-            <label for="trip-date">Enter the date of the trip here</label>
+            <label for="trip-date">Enter the start date your trip.</label>
             <input id="trip-date" type="date" name="start of trip">
-            <button id="time-submit" type="submit">Submit</button>
             <div id="days-till-trip"></div>
+            <label id="trip-end">Enter the end date of your trip.</label>
+            <input id="trip-end" type="date" name="end of trip">
+            <div id="trip-length"></div>
+            <button id="time-submit" type="submit">Submit</button>
         </div>
+        <div></div>
         <div class="holder feel">
-            <label for="feelings">How are you feeling today?</label>
-            <textarea class="myInput" id="feelings" placeholder="Enter your feelings here" rows="1" cols="50"></textarea>
             <button id="generate" type="submit"> Generate </button>
         </div>
         <div class="holder entry">

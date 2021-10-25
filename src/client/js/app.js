@@ -50,7 +50,6 @@ const cbFunction = (event) => {
     } else {
         try {
             const zip = document.getElementById('zip').value;
-            //const userResponse = document.getElementById('feelings').value;
             getGeoInfo(baseURL, zip).then(
                 (data) => {
                     globals.city = data.postalcodes[0].placeName;
@@ -125,11 +124,18 @@ const postData = async(url = '', data = {}) => { // source: lesson 4: asynchrono
 };
 
 const countdown = () => {
-    let current_date = new Date(new Date().toISOString().split('T')[0]);
-    let date_of_trip = new Date(document.getElementById('trip-date').value);
-    let delta = deltaBetweenDates(date_of_trip, current_date);
-    document.getElementById('days-till-trip').innerHTML = 'There are ' + delta + ' days till your trip.';
-    days_till_trip = delta;
+
+    let tripDate = document.getElementById('trip-date').value;
+    if (tripDate == '') {
+        alert('Please enter the start-date of the trip.');
+    } else {
+        let current_date = new Date(new Date().toISOString().split('T')[0]);
+        let date_of_trip = new Date(tripDate);
+        let delta = deltaBetweenDates(date_of_trip, current_date);
+        document.getElementById('days-till-trip').innerHTML = 'There are ' + delta + ' days till your trip.';
+        days_till_trip = delta;
+    }
+
 };
 
 document.getElementById('time-submit').addEventListener('click', countdown);
