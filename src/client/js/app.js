@@ -1,4 +1,5 @@
 /* Global Variables */
+import { deltaBetweenDates } from './deltaBetweenDates'
 
 const baseURL = "http://api.geonames.org/postalCodeLookupJSON?country=DE&postalcode=";
 
@@ -65,6 +66,15 @@ const postData = async(url = '', data = {}) => { // source: lesson 4: asynchrono
         console.log("error", error);
     }
 }
+
+const countdown = () => {
+    let current_date = new Date(new Date().toISOString().split('T')[0])
+    let date_of_trip = new Date(document.getElementById("trip-date").value);
+    let delta = deltaBetweenDates(date_of_trip, current_date);
+    document.getElementById("days-till-trip").innerHTML = "There are " + delta + " days till your trip."
+}
+
+document.getElementById("time-submit").addEventListener("click", countdown)
 
 export {
     getWeatherData,
