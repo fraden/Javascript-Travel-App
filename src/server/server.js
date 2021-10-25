@@ -43,3 +43,10 @@ app.post('/data', function(req, res) {
     projectData['lng'] = req.body.lng;
     projectData['country'] = req.body.country;
 });
+
+app.post('/forecast', function(req, res) {
+    console.log(req.body);
+    projectData['high'] = req.body.high;
+    projectData['low'] = req.body.low;
+    projectData['description'] = req.body.description;
+});
