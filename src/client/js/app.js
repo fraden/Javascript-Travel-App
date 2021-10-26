@@ -12,12 +12,6 @@ const pixabay_apiKey = '24029659-1e8be7f9b0a8b31c54fe84556';
 
 let globals = {}; // Globally scoped object
 
-// Create a new date instance dynamically with JS
-//let d = new Date();
-//let newDate = d.getMonth() + 1 + '.' + d.getDate() + '.' + d.getFullYear();
-
-let days_till_trip;
-
 const getGeoInfo = async(url, zip) => {
     const res = await fetch(url + zip + '&username=fraden');
     const data = await res.json();
@@ -35,10 +29,6 @@ const getImage = async(url, searchString, api_key) => {
     const data = await res.json();
     return data;
 };
-
-// a.then((data) => console.log(data.data[0].high_temp))
-// a.then((data) => console.log(data.data[0].low_temp))
-// a.then((data) => console.log(data.data[0].weather.description))
 
 
 const cbFunction = (event) => {
@@ -59,7 +49,7 @@ const cbFunction = (event) => {
             getWeatherForecast(weatherbitBaseUrl, zip, weatherbit_apiKey).then(
                 (data) => {
                     countdown();
-                    postData('http://localhost:8081/forecast', { low: data.data[days_till_trip].low_temp, high: data.data[days_till_trip].high_temp, description: data.data[days_till_trip].weather.description });
+                    postData('http://localhost:8081/forecast', { low: data.data[globals.daysTillTripdaysTillTrip].low_temp, high: data.data[globals.daysTillTripdaysTillTrip].high_temp, description: data.data[globals.daysTillTripdaysTillTrip].weather.description });
                 }).then(() => {
                 refreshUI();
             });
@@ -133,7 +123,7 @@ const countdown = () => {
         let tripDate = new Date(tripDateText);
         let delta = deltaBetweenDates(tripDate, currentDate);
         document.getElementById('days-till-trip').innerHTML = 'There are ' + delta + ' days till your trip.';
-        days_till_trip = delta;
+        globals.daysTillTrip = delta;
 
         let tripEnd = document.getElementById('trip-end').value;
         if (tripEnd != '') {
