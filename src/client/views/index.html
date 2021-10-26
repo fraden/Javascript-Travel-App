@@ -11,38 +11,43 @@
         <div class="holder headline">
             Weather Journal App
         </div>
-        <div class="holder zip">
-            <label for="zip">Enter Zipcode here</label>
-            <input type="text" id="zip" placeholder="enter zip code here">
-        </div>
-        <div class="tripdates" id="time">
-            <label for="trip-date">Enter the start date of your trip.</label>
-            <input id="trip-date" type="date" name="start of trip">
-            <label for="trip-end">Enter the end date of your trip.</label>
-            <input id="trip-end" type="date" name="end of trip">
-            <div id="days-till-trip"></div>
-            <div id="trip-length"></div>
-            <button class="button" id="generate" type="submit"> Generate </button>
-        </div>
-        <div class="holder locationinfos">
-            <div class="title" style="font-size: larger;">Location infos</div>
-            <div id="lat"></div>
-            <div id="lng"></div>
-            <div id="country"></div>
-            <div id="city"></div>
-            <div>
-                <img id="city-image" src="" width="150">
+        <div class="content">
+            <div class="input">
+                <div class="holder zip">
+                    <label for="zip">Enter Zipcode here</label>
+                    <input type="text" id="zip" placeholder="enter zip code here">
+                </div>
+                <div class="tripdates" id="time">
+                    <label for="trip-date">Enter the start date of your trip.</label>
+                    <input id="trip-date" type="date" name="start of trip">
+                    <label for="trip-end">Enter the end date of your trip.</label>
+                    <input id="trip-end" type="date" name="end of trip">
+                    <div id="days-till-trip"></div>
+                    <div id="trip-length"></div>
+                    <button class="button" id="generate" type="submit"> Generate </button>
+                </div>
+            </div>
+            <div class="output">
+                <div class="holder locationinfos">
+                    <div class="title" style="font-size: larger;">Location infos</div>
+                    <div id="lat"></div>
+                    <div id="lng"></div>
+                    <div id="country"></div>
+                    <div id="city"></div>
+                    <div>
+                        <img id="city-image" src="" width="150">
+                    </div>
+                </div>
+                <div class="forecast">
+                    <div class="forecast-title" style="font-size: larger;">Weather forecast</div>
+                    <div id="forecast-entries">
+                        <div id="high"></div>
+                        <div id="low"></div>
+                        <div id="description"></div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="forecast">
-            <div class="forecast-title" style="font-size: larger;">Weather forecast</div>
-            <div id="forecast-entries">
-                <div id="high"></div>
-                <div id="low"></div>
-                <div id="description"></div>
-            </div>
-        </div>
-
     </div>
 
 </body>

@@ -5,17 +5,12 @@ body {
 }
 
 #app {
-    display: grid;
-    grid-template-rows: auto auto auto;
-    grid-template-columns: repeat(5 1fr);
-    grid-template-areas: "hd hd hd hd hd" "zp zp td td td" "li li fc fc fc";
     background: darkorange;
     color: #f0d43a;
     justify-content: center;
     grid-gap: 1em;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
-    border: medium dashed red;
 }
 
 .entry {
@@ -36,12 +31,31 @@ body {
     grid-area: td;
 }
 
+.content {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.input {
+    width: 700px;
+    grid-area: inp;
+}
+
+.output {
+    grid-area: out;
+    width: 400px;
+}
+
 .locationinfos {
     grid-area: li;
+    display: flex;
+    flex-flow: column wrap;
 }
 
 .forecast {
     grid-area: fc;
+    display: flex;
+    flex-flow: column wrap;
 }
 
 
