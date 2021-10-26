@@ -31,49 +31,50 @@ const getImage = async(url, searchString, api_key) => {
 };
 
 
-const cbFunction = (event) => {
-
+export async function cbFunction(event) {
 
     event.preventDefault();
     if (document.getElementById('trip-date').value == '') {
         alert('Please enter a trip date!');
     } else {
         try {
+
+            countdown();
             const zip = document.getElementById('zip').value;
-            getGeoInfo(baseURL, zip).then(
-                (data) => {
-                    globals.city = data.postalcodes[0].placeName;
-                    postData('http://localhost:8081/data', { lat: data.postalcodes[0].lat, lng: data.postalcodes[0].lng, country: data.postalcodes[0].countryCode, city: data.postalcodes[0].placeName }); // structure can be seen on https://openweathermap.org/current#zip
-                });
+            const geoInfo = await getGeoInfo(baseURL, zip);
+            const weatherInfo = await getWeatherForecast(weatherbitBaseUrl, zip, weatherbit_apiKey);
+            let image = await getImage(pixabayBaseUrl, geoInfo.postalcodes[0].placeName + '+stadt', pixabay_apiKey);
+            if (image.total == 0) {
+                image = await getImage(pixabayBaseUrl, geoInfo.postalcodes[0].adminName1, pixabay_apiKey);
+            }
 
-            getWeatherForecast(weatherbitBaseUrl, zip, weatherbit_apiKey).then(
-                (data) => {
-                    countdown();
-                    console.log(data);
-                    postData('http://localhost:8081/forecast', { low: data.data[globals.daysTillTrip].low_temp, high: data.data[globals.daysTillTrip].high_temp, description: data.data[globals.daysTillTrip].weather.description });
-                }).then(() => {
-                refreshUI();
-            });
+            await postData('http://localhost:8081/allData', {
+                geoInfo: {
+                    lat: geoInfo.postalcodes[0].lat,
+                    lng: geoInfo.postalcodes[0].lng,
+                    country: geoInfo.postalcodes[0].countryCode,
+                    city: geoInfo.postalcodes[0].placeName
+                },
 
-            getImage(pixabayBaseUrl, globals.city + '+stadt', pixabay_apiKey).then(
-                (data) => {
-                    console.log(data);
-                    postData('http://localhost:8081/image', { imageUrl: data.hits[0].webformatURL });
-                }).then(() => {
-                refreshUI();
+                weatherData: {
+                    low: weatherInfo.data[globals.daysTillTrip].low_temp,
+                    high: weatherInfo.data[globals.daysTillTrip].high_temp,
+                    description: weatherInfo.data[globals.daysTillTrip].weather.description
+                },
+                imageUrl: image.hits[0].webformatURL
             });
 
             refreshUI();
 
-
-            // todo: why doesn't the values change after some clicks?
         } catch (error) {
             console.log('error', error);
         }
     }
 
 
-};
+}
+
+
 
 document.getElementById('generate').addEventListener('click', cbFunction);
 
@@ -81,14 +82,15 @@ const refreshUI = async() => { // source: lesson 4: asynchronous javascript -  1
     const request = await fetch('http://localhost:8081/all');
     try {
         const projectData = await request.json();
-        document.getElementById('lat').innerHTML = projectData.lat;
-        document.getElementById('lng').innerHTML = projectData.lng;
-        document.getElementById('country').innerHTML = projectData.country;
-        document.getElementById('city').innerHTML = projectData.city;
+        console.log(projectData);
+        document.getElementById('lat').innerHTML = projectData.geoInfo.lat;
+        document.getElementById('lng').innerHTML = projectData.geoInfo.lng;
+        document.getElementById('country').innerHTML = projectData.geoInfo.country;
+        document.getElementById('city').innerHTML = projectData.geoInfo.city;
 
-        document.getElementById('high').innerHTML = 'Max temperature: ' + projectData.high;
-        document.getElementById('low').innerHTML = 'Min temperature: ' + projectData.low;
-        document.getElementById('description').innerHTML = projectData.description;
+        document.getElementById('high').innerHTML = 'Max temperature: ' + projectData.weatherData.high;
+        document.getElementById('low').innerHTML = 'Min temperature: ' + projectData.weatherData.low;
+        document.getElementById('description').innerHTML = projectData.weatherData.description;
 
         document.getElementById('city-image').src = projectData.imageUrl;
     } catch (error) {

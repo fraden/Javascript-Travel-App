@@ -34,6 +34,8 @@ const server = app.listen(port, () => {
 
 // Callback function to complete GET '/all'
 app.get('/all', (req, res) => {
+    console.log("projectData");
+    console.log(projectData);
     res.send(projectData);
 });
 
@@ -54,4 +56,9 @@ app.post('/forecast', function(req, res) {
 
 app.post('/image', function(req, res) {
     projectData['imageUrl'] = req.body.imageUrl;
+});
+
+app.post('/allData', function(req, res) {
+    projectData = req.body;
+    console.log(data);
 });
