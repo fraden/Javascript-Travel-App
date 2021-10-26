@@ -48,8 +48,6 @@ export async function cbFunction(event) {
                 image = await getImage(pixabayBaseUrl, geoInfo.postalcodes[0].adminName1, pixabay_apiKey);
             }
             let weatherData;
-            console.log('daysTillTrip');
-            console.log(globals.daysTillTrip);
             if (globals.daysTillTrip < 0 || globals.daysTillTrip > 15) {
                 weatherData = {
                     low: 'not available',
