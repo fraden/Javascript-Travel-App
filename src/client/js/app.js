@@ -56,6 +56,7 @@ const cbFunction = (event) => {
 
             getImage(pixabayBaseUrl, globals.city + '+stadt', pixabay_apiKey).then(
                 (data) => {
+                    console.log(data);
                     postData('http://localhost:8081/image', { imageUrl: data.hits[0].webformatURL });
                 }).then(() => {
                 refreshUI();
