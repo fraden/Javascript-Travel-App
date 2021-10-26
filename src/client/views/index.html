@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
     <title>Weather Journal</title>
 </head>
 
@@ -30,12 +32,14 @@
             <div class="output">
                 <div class="holder locationinfos">
                     <div class="title" style="font-size: larger;">Location infos</div>
-                    <div id="lat"></div>
-                    <div id="lng"></div>
-                    <div id="country"></div>
-                    <div id="city"></div>
                     <div>
-                        <img id="city-image" src="" width="150">
+                        <div id="lat"></div>
+                        <div id="lng"></div>
+                        <div id="country"></div>
+                        <div id="city"></div>
+                    </div>
+                    <div>
+                        <img id="city-image" src="" width="250">
                     </div>
                 </div>
                 <div class="forecast">
@@ -49,6 +53,16 @@
             </div>
         </div>
     </div>
+    <script>
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js');
+                console.log('Service Worker Registered');
+            });
+        }
+    </script>
 
 </body>
 

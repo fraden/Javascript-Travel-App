@@ -27,3 +27,6 @@ Run
 npm start lint
 ```
 to do a lint check.
+
+## Extra functionality
+The app provides the functionality to add an end date of the trip and show the length of the trip.

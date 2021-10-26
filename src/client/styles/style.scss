@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;500;600;700&display=swap');
 body {
-    background: #fffff8;
+    background: darkorange;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0px;
 }
 
 #app {
-    background: darkorange;
     color: #f0d43a;
     justify-content: center;
     grid-gap: 1em;
@@ -39,23 +39,28 @@ body {
 .input {
     width: 700px;
     grid-area: inp;
+    margin: 50px;
 }
 
 .output {
     grid-area: out;
     width: 400px;
+    height: 600px;
+    margin: 50px;
 }
 
 .locationinfos {
     grid-area: li;
     display: flex;
     flex-flow: column wrap;
+    height: 300px;
 }
 
 .forecast {
     grid-area: fc;
     display: flex;
     flex-flow: column wrap;
+    height: 300px;
 }
 
 
@@ -104,8 +109,6 @@ textarea {
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
 }
-
-.title {}
 
 
 /* Reset style for HTML element on active to have no border*/
