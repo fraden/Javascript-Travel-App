@@ -34,31 +34,15 @@ const server = app.listen(port, () => {
 
 // Callback function to complete GET '/all'
 app.get('/all', (req, res) => {
-    console.log("projectData");
+    console.log('projectData');
     console.log(projectData);
     res.send(projectData);
 });
 
 // Post Route
-
-app.post('/data', function(req, res) {
-    projectData['lat'] = req.body.lat;
-    projectData['lng'] = req.body.lng;
-    projectData['country'] = req.body.country;
-    projectData['city'] = req.body.city;
-});
-
-app.post('/forecast', function(req, res) {
-    projectData['high'] = req.body.high;
-    projectData['low'] = req.body.low;
-    projectData['description'] = req.body.description;
-});
-
-app.post('/image', function(req, res) {
-    projectData['imageUrl'] = req.body.imageUrl;
-});
-
 app.post('/allData', function(req, res) {
     projectData = req.body;
-    console.log(data);
+    console.log('data received');
+    console.log('projectData:');
+    console.log(projectData);
 });
