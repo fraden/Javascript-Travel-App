@@ -26,4 +26,4 @@ Run
 ```
 npm start lint
 ```
-to to a lint check
+to do a lint check.
