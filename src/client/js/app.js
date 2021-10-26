@@ -49,6 +49,7 @@ const cbFunction = (event) => {
             getWeatherForecast(weatherbitBaseUrl, zip, weatherbit_apiKey).then(
                 (data) => {
                     countdown();
+                    console.log(data);
                     postData('http://localhost:8081/forecast', { low: data.data[globals.daysTillTrip].low_temp, high: data.data[globals.daysTillTrip].high_temp, description: data.data[globals.daysTillTrip].weather.description });
                 }).then(() => {
                 refreshUI();
