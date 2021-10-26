@@ -15,20 +15,16 @@
             <label for="zip">Enter Zipcode here</label>
             <input type="text" id="zip" placeholder="enter zip code here">
         </div>
-        <div id="time">
-            <label for="trip-date">Enter the start date your trip.</label>
+        <div class="tripdates" id="time">
+            <label for="trip-date">Enter the start date of your trip.</label>
             <input id="trip-date" type="date" name="start of trip">
-            <div id="days-till-trip"></div>
             <label for="trip-end">Enter the end date of your trip.</label>
             <input id="trip-end" type="date" name="end of trip">
+            <div id="days-till-trip"></div>
             <div id="trip-length"></div>
-            <button id="time-submit" type="submit">Submit</button>
+            <button class="button" id="generate" type="submit"> Generate </button>
         </div>
-        <div></div>
-        <div class="holder feel">
-            <button id="generate" type="submit"> Generate </button>
-        </div>
-        <div class="holder entry">
+        <div class="holder locationinfos">
             <div class="title" style="font-size: larger;">Location infos</div>
             <div id="lat"></div>
             <div id="lng"></div>
@@ -38,12 +34,15 @@
                 <img id="city-image" src="" width="150">
             </div>
         </div>
-        <div class="forecast-title" style="font-size: larger;">Weather forecast</div>
-        <div id="forecast-entries">
-            <div id="high"></div>
-            <div id="low"></div>
-            <div id="description"></div>
+        <div class="forecast">
+            <div class="forecast-title" style="font-size: larger;">Weather forecast</div>
+            <div id="forecast-entries">
+                <div id="high"></div>
+                <div id="low"></div>
+                <div id="description"></div>
+            </div>
         </div>
+
     </div>
 
 </body>

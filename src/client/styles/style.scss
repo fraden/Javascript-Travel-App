@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;500;600;700&display=swap');
 body {
     background: #fffff8;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -5,9 +6,10 @@ body {
 
 #app {
     display: grid;
-    //grid-auto-rows: minmax(150px, auto);
-    /* grid-template-columns:  */
-    background: #f23557;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: repeat(5 1fr);
+    grid-template-areas: "hd hd hd hd hd" "zp zp td td td" "li li fc fc fc";
+    background: darkorange;
     color: #f0d43a;
     justify-content: center;
     grid-gap: 1em;
@@ -16,25 +18,31 @@ body {
     border: medium dashed red;
 }
 
-.holder {}
-
 .entry {
     background: rgba(59, 74, 107, .4);
 }
 
-#entryHolder {}
-
-#date {}
-
-#temp {}
-
-#content {}
-
 .headline {
+    grid-area: hd;
+    text-align: center;
     font-size: xx-large;
 }
 
-.title {}
+.zip {
+    grid-area: zp;
+}
+
+.tripdates {
+    grid-area: td;
+}
+
+.locationinfos {
+    grid-area: li;
+}
+
+.forecast {
+    grid-area: fc;
+}
 
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
@@ -77,6 +85,8 @@ textarea {
     font-family: 'Oswald', sans-serif;
     border: medium dashed purple;
 }
+
+.title {}
 
 
 /* Reset style for HTML element on active to have no border*/

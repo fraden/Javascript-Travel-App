@@ -146,8 +146,6 @@ const countdown = () => {
 
 };
 
-document.getElementById('time-submit').addEventListener('click', countdown);
-
 export {
     getGeoInfo,
     refreshUI
