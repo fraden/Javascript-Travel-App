@@ -82,7 +82,6 @@ const refreshUI = async() => { // source: lesson 4: asynchronous javascript -  1
     const request = await fetch('http://localhost:8081/all');
     try {
         const projectData = await request.json();
-        console.log(projectData);
         document.getElementById('lat').innerHTML = projectData.geoInfo.lat;
         document.getElementById('lng').innerHTML = projectData.geoInfo.lng;
         document.getElementById('country').innerHTML = projectData.geoInfo.country;
