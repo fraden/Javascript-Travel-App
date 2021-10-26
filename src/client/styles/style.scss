@@ -60,7 +60,10 @@ input {
     color: #f0d43a;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
-    border: medium dashed green;
+    &:hover {
+        background-color: blue;
+        transition: 0.5s;
+    }
 }
 
 button {
@@ -70,8 +73,11 @@ button {
     color: #f0d43a;
     font-size: 26px;
     font-family: 'Oswald', sans-serif;
-    border: medium dashed blue;
     box-shadow: 2px 4px 5px #444;
+    &:hover {
+        background-color: blue;
+        transition: 0.5s;
+    }
 }
 
 h1 {
@@ -83,7 +89,6 @@ textarea {
     color: #f0d43a;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
-    border: medium dashed purple;
 }
 
 .title {}
