@@ -7,7 +7,7 @@ const weatherbitBaseUrl = 'https://api.weatherbit.io/v2.0/forecast/daily?country
 
 const pixabayBaseUrl = 'https://pixabay.com/api/?image_type=photo&pretty=true&q=';
 
-const weatherbit_apiKey = '3c7928d0043e4e98a2429187b5fa5cce'; //todo: roll the api-keys and load them from .env-file
+const weatherbit_apiKey = '3c7928d0043e4e98a2429187b5fa5cce';
 const pixabay_apiKey = '24029659-1e8be7f9b0a8b31c54fe84556';
 
 let globals = {}; // Globally scoped object
