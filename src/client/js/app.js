@@ -48,7 +48,7 @@ export async function cbFunction(event) {
                 image = await getImage(pixabayBaseUrl, geoInfo.postalcodes[0].adminName1, pixabay_apiKey);
             }
 
-            await postData('http://localhost:8081/allData', {
+            postData('http://localhost:8081/allData', {
                 geoInfo: {
                     lat: geoInfo.postalcodes[0].lat,
                     lng: geoInfo.postalcodes[0].lng,
