@@ -47,7 +47,22 @@ export async function cbFunction(event) {
             if (image.total == 0) {
                 image = await getImage(pixabayBaseUrl, geoInfo.postalcodes[0].adminName1, pixabay_apiKey);
             }
-
+            let weatherData;
+            console.log('daysTillTrip');
+            console.log(globals.daysTillTrip);
+            if (globals.daysTillTrip < 0 || globals.daysTillTrip > 15) {
+                weatherData = {
+                    low: 'not available',
+                    high: 'not available',
+                    description: 'not available'
+                };
+            } else {
+                weatherData = {
+                    low: weatherInfo.data[globals.daysTillTrip].low_temp,
+                    high: weatherInfo.data[globals.daysTillTrip].high_temp,
+                    description: weatherInfo.data[globals.daysTillTrip].weather.description
+                };
+            }
             postData('http://localhost:8081/allData', {
                 geoInfo: {
                     lat: geoInfo.postalcodes[0].lat,
@@ -56,11 +71,7 @@ export async function cbFunction(event) {
                     city: geoInfo.postalcodes[0].placeName
                 },
 
-                weatherData: {
-                    low: weatherInfo.data[globals.daysTillTrip].low_temp,
-                    high: weatherInfo.data[globals.daysTillTrip].high_temp,
-                    description: weatherInfo.data[globals.daysTillTrip].weather.description
-                },
+                weatherData: weatherData,
                 imageUrl: image.hits[0].webformatURL
             });
 
